@@ -1,7 +1,7 @@
 {
     "version": 2,
     "builds": [
-      { "src": "/", "use": "@vercel/static-build", "config": { "distDir": "dist" } }
+      { "src": "dist", "use": "@vercel/static-build", "config": { "distDir": "dist" } }
     ],
     "routes": [
       { "src": "/(.*)", "dest": "/dist/$1" }
