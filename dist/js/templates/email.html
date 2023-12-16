@@ -1,0 +1,17 @@
+<div class="email" data-email-id="{index}">
+    <button class="mark-spam"><i class="fa fa-times-circle"></i>Mark Spam</button>
+    <button class="mark-not-spam"><i class="fa fa-check-circle"></i>Not Spam</button>
+    <div class="spam_prob hidden" style="background:{color}; border:1px solid {border};" data-value="{percentage}">
+      <i class="fa fa-ban"></i>{percentage}%<div class="tooltip"><span class="tooltiptext">There is a low likelihood this email is spam.</span></div>
+    </div>
+    <div class="check">
+      <input class="marked" id="cbx-{index}" type="checkbox" style="display: none;"/>
+      <label class="cbx" for="cbx-{index}">
+        <span><svg width="12px" height="9px" viewbox="0 0 12 9"><polyline points="1 5 4 8 11 1"></polyline></svg></span>
+      </label>
+    </div>
+    <div class="sender">{email.sender}</div>
+    <div class="subject">{email.subject}</div>
+    <div class="excerpt">{email.content}</div>
+    <div class="timestamp">{email.timestamp}</div>
+  </div>

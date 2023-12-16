@@ -1,0 +1,200 @@
+/* sidebar */
+#logo{
+    text-align:center;
+    display:block;
+    margin:33px 25px 28px 25px;
+    font-size:24px;
+    height:max-content;
+}
+.settings-header{
+    padding:var(--padding-default);
+    flex-direction: row;
+    /*border-bottom:1px solid rgba(255,255,255,.2);*/
+    box-sizing: border-box;
+    height:max-content;
+    position:relative;
+}
+.settings-header:before{
+    font-family: FontAwesome; 
+    content: "\f1de";
+    font-size:var(--ico-size);
+    position:absolute;
+    left:var(--padding-default);
+    top:calc(50% - .5*(var(--ico-size)));
+}
+.settings-header h3{
+    margin:0;
+    font-size:21px;
+    text-align:center;
+}
+
+.option{
+    padding:20px;
+    display:flex;
+    flex-direction: row;
+    /*border-bottom:1px solid rgba(255,255,255,.2);*/
+    box-sizing: border-box;
+    height:max-content;
+}
+
+.option.heuristics{
+    flex-direction:column;
+}
+
+.option i{
+    width:20px;
+    font-size:20px;
+    align-self:flex-start;
+    margin-right:15px;
+
+}
+.option-header{
+    display:flex;
+    align-items: center;
+    width:100%;
+}
+
+.option.heuristics #threshold{
+    margin:0 auto;
+    margin-top:30px;
+}
+
+.option-header label{
+    font-size:15px;
+    line-height:21px;
+    flex:1;
+    cursor:pointer;
+}
+.option-header .tooltip{
+    align-self:start;
+}
+.option-header .tooltip i{
+    transition:.3s all;
+    color:#ccc;
+    cursor:pointer;
+}
+.option-header .tooltip i:hover{
+    color:#fff;
+}
+
+.option.blacklist, .option.whitelist{
+    flex-direction:column;
+}
+
+.option.whitelist .option-header, .option.blacklist .option-header{
+    flex-direction: row;
+}
+
+#whitelist, #blacklist{
+    flex:1;
+    background:rgba(255,255,255,.05);
+    transition:.3s all;
+    border:1px solid #666;
+    padding:10px;
+    border-radius:var(--border-radius);
+    height:100%;
+    color:#fff;
+}
+#whitelist:hover, #blacklist:hover{
+    background:rgba(255,255,255,.1);
+}
+#whitelist:focus, #blacklist:focus{
+    outline:none;
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+    border-color: rgba(81, 203, 238, 1);
+}
+.option.whitelist .option-header label, .option.blacklist .option-header label{
+    margin-bottom:20px;
+    height:max-content;
+}
+
+.option-header .toggle{
+    width:max-content;
+}
+.option label{
+    font-size:15px;
+    line-height:21px;
+    flex:1;
+}
+.option .toggle{
+    justify-self:flex-end;
+}
+
+
+.option.blacklist, .option.whitelist{
+    flex:1;
+}
+
+/**/
+
+#detect{
+    display:flex;
+    width:100%;
+    border: 1px solid rgba(255,255,255,.3);
+    outline: none;
+    color: rgba(255,255,255,.5);
+    background:transparent;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    padding:15px;
+    font-size:18px;
+}
+#detect div{
+    flex:1;
+    line-height:20px;
+}
+#detect i{
+    margin-right:5px;
+    align-self:flex-end;
+}
+#detect:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+#detect:active {
+    color: #000
+}
+
+#detect:active:after {
+    background: transparent;
+}
+#detect:hover{
+    color:#fff;
+    border:1px solid #fff;
+}
+#detect:hover:before {
+    opacity: 1;
+}
+
+#detect:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background:transparent;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}

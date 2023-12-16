@@ -1,0 +1,159 @@
+/* page header */
+#inbox-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+#controls{
+    width:max-content;
+    margin:0 10px;
+    display:inline-flex;
+    height: max-content;
+    margin-right: 20px;
+}
+
+/* email style */
+
+#inbox-tab{
+}
+#spam-tab{
+}
+
+
+/* email */
+.email, .spam{
+    display:flex;
+    font-size:16px;
+    justify-content: space-between;
+    border-bottom:1px solid #ddd;
+    align-items: center;
+    line-height:1.2em;
+    background: #f8f8f8;
+    background:#fff;
+    position:relative;
+    transition:.3s all;
+    min-height: 160px;
+    /*max-height:3.6em;
+    margin-bottom:10px;*/
+}
+.email:last-child, .spam:last-child{
+    border-bottom:none;
+}
+.email:hover, .spam:hover{
+    background: #fff;
+    background: #f8f8f8;
+    cursor:pointer;
+}
+.email:hover .mark-spam, .spam:hover .mark-not-spam{
+    display:flex;
+    align-items: center;
+}
+
+.email .sender, .email .subject, 
+.email .excerpt, .email .timestamp,
+.spam .sender, .spam .subject, 
+.spam .excerpt, .spam .timestamp{
+    padding:20px;
+}
+.email .sender, .spam .sender{
+    font-weight:700;
+    width:200px;
+    word-break:break-word;
+}
+.email .subject, .spam .subject{
+    font-weight:700;
+    width: max-content;
+    flex:1;
+    word-break:break-word;
+}
+.email .excerpt, .spam .excerpt{
+    flex:2;
+    font-weight:300;
+    word-break:break-word;
+}
+
+.email .timestamp, .spam .timestamp{
+    width:max-content;
+    font-weight:700;
+}
+
+/* message */
+.message{
+    padding:25px;
+    font-size: 16px;
+    color: #444;
+}
+
+
+
+/* buttons */
+.mark-spam, .mark-not-spam{
+    position:absolute;
+    right:20px;
+    top:20px;
+    display:none;
+    transition:.3s all;
+    font-size:13px;
+    border:1px solid var(--primary-color);
+    padding:10px;
+    color:var(--primary-color);
+    background:#fff;
+    cursor:pointer;
+    border-radius:var(--border-radius);
+}
+.mark-spam i, .mark-not-spam i{
+    font-size:16px;
+    margin-right:10px;
+    width:max-content;
+}
+.mark-spam{
+    border:1px solid var(--primary-color);
+    color:var(--primary-color);
+}
+.mark-not-spam{
+    border:1px solid #4BB543;
+    color:#4BB543;
+}
+
+.spam_prob{
+    background-color: #666;
+    border: 1px solid #444;
+    color: #fff;
+    border-radius: 500px;
+    padding: 2px 8px;
+    font-size: 14px;
+    position: absolute;
+    left: 20px;
+    top: 20px;
+}
+.spam_prob i:first-child{
+    margin-right:5px;
+}
+
+/*.spam_prob .tooltip{
+    margin-left:5px;
+    border-bottom:none;
+}
+.spam_prob:hover .tooltip{
+    display:block;
+}*/
+
+
+.spam_prob .tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom:none;
+    margin-left:5px;
+}
+
+.spam_prob:hover .tooltip .tooltiptext{
+    opacity: 1;
+    visibility: visible;
+}
+
+.hidden{
+    display:none;
+    visibility:hidden;
+    opacity:0;
+}

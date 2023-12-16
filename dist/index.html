@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- imported style -->
+    <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100;0,9..40,500;1,9..40,200&display=swap" rel="stylesheet">
+
+
+
+    <!-- custom style -->
+    <link rel="stylesheet" href="style/main.css"> <!-- structure -->
+    <link rel="stylesheet" href="style/menu.css"> <!-- menu -->
+    <link rel="stylesheet" href="style/email.css"> <!-- email style -->
+    <link rel="stylesheet" href="style/ui.css"> <!-- ui style -->
+
+    <!-- scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.3/purify.min.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+
+    <script src="js/jquery/notify.min.js"></script>
+    <script src="js/jquery/jquery.csv.min.js"></script>
+    <script src="js/jquery/jquery.highlight.js"></script>
+
+    
+    <script src="js/modules/util.js" type="module"></script>
+    <script src="js/modules/email.js" type="module"></script>
+    <script src="js/modules/inbox.js" type="module"></script>
+    <script src="js/modules/model.mjs" type="module"></script>
+    <script src="js/modules/filter.js" type="module"></script>
+    <script src="js/main.js" type="module"></script>
+    <title>Spam Detector</title>
+</head>
+<body>
+    <div class="container">
+        <div id="sidebar">
+            <a id="logo">PhantomFilter</a>
+            <div class="option heuristics">
+                <div class="option-header">
+                    <i class="fa fa-puzzle-piece"></i>
+                    <label for="heuristics">Heuristic Analysis</label><input type="checkbox" id="heuristics" class="toggle"/>
+                </div>
+                <input type="range" min="0" max="100" value="0" id="threshold"/>
+            </div>
+            <div class="option blacklist">
+                <div class="option-header">
+                    <i class="fa fa-ban"></i>
+                    <label for="blacklist">Blacklist</label>
+                    <div class="tooltip"><i class="fa fa-info-circle"></i>
+                        <span class="tooltiptext">Separate emails, words, and phrases by line and by comma. Emails containing these terms will automatically be marked as spam.</span>
+                    </div>
+                </div>
+                <textarea id="blacklist" name="blacklist" rows="" cols="" placeholder="Ex. Cash, Buy Now"></textarea>
+            </div>
+            <div class="option whitelist">          
+                <div class="option-header">
+                    <i class="fa fa-check-circle"></i> 
+                    <label for="whitelist">Whitelist</label>
+                    <div class="tooltip"><i class="fa fa-info-circle"></i>
+                        <span class="tooltiptext">Separate emails, words, and phrases by line and by comma. Emails containing these terms will not be marked as spam.</span>
+                    </div>
+                </div>
+                <textarea id="whitelist" name="whitelist" rows="" cols="" placeholder="Ex, Aunt Joanie"></textarea>
+            </div>
+            <div class="option">
+                <button id="detect"><div>Detect</div>
+                <i class="fa fa-chevron-circle-right"></i></button>
+            </div>
+        </div>
+        <div id="main">
+            <div id="header"><h3>Spam Detector</h3>
+                <div id="search">
+                    <i class="fa fa-search"></i>
+                    <input type="text" id="s" name="s" placeholder="Search..." autocomplete="off">
+                </div>
+            </div>
+            <div id="content">
+                <div id="tabs">
+                    <div id="inbox-header">
+                        <ul>
+                            <li><a href="#inbox" id="inbox-tab"><i class="fa fa-envelope"></i><span>Inbox <span class="notifications" data-value="0">0</span></span></a></li>
+                            <li><a href="#spam" id="spam-tab"><i class="fa fa-flag"></i><span>Spam <span class="notifications" data-value="0">0</span></span></a></li>
+                        </ul>
+                        <div id="controls">
+                            <button id="mark-all-spam">Mark Spam</button>
+                            <button id="mark-all-not-spam">Mark Not Spam</button>
+                        </div>
+                    </div>
+                    <div id="inbox" class="tab">
+                        <div id="emails">
+                            <div class="message"></div>
+                            <div id="loading">
+                                <img src="img/loading.gif" alt="Loading...">
+                                <p>Loading...</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="spam" class="tab">
+                        <div class="message">
+                            Spam folder is empty. Try running the spam detector to filter spam.
+                        </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

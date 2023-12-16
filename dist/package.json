@@ -1,0 +1,17 @@
+{
+  "name": "aispamfilter",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "echo 'No build steps defined'",
+    "test": "echo 'No tests defined'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "dependencies": {}
+}

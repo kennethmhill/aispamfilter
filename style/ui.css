@@ -1,0 +1,459 @@
+/* tabs */
+.tab{
+  border:1px solid #ccc;
+  margin-top:-2px;
+  background:#fff;
+}
+
+#tabs ul.ui-tabs-nav{
+    list-style-type:none;
+    display:flex;
+    margin:0;
+    padding:0;
+    display:inline-flex;
+    z-index:1;
+}
+#tabs ul.ui-tabs-nav li{
+    margin:0;
+    padding:0;
+}
+#tabs ul.ui-tabs-nav li:last-child a{
+  border-right:1px solid #ccc;
+}
+#tabs ul.ui-tabs-nav li a{
+  display:block;
+  padding:20px;
+  border: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  border-right: none;
+  background:#f5f5f5;
+  text-decoration:none;
+  color:#444;
+  font-size:16px;
+} 
+#tabs ul.ui-tabs-nav li a i{
+  margin-right:20px;
+  font-size:var(--ico-size);
+  color:#666;
+}
+
+#tabs ul.ui-tabs-nav li.ui-tabs-active a{
+  /*background:#fff;*/
+  background:#fff;
+  border-bottom:none;
+}
+
+#tabs ul.ui-tabs-nav li.ui-tabs-active #spam-tab,
+#tabs ul.ui-tabs-nav li.ui-tabs-active #spam-tab i,
+#tabs ul.ui-tabs-nav li.ui-tabs-active #spam-tab .notifications{
+  color:#f00;
+}
+#tabs ul.ui-tabs-nav li.ui-tabs-active #spam-tab .notifications{
+  border-color:#f00;
+  background:#f00;
+  color:#fff;
+}
+
+#tabs ul.ui-tabs-nav li.ui-tabs-active #inbox-tab,
+#tabs ul.ui-tabs-nav li.ui-tabs-active #inbox-tab i,
+#tabs ul.ui-tabs-nav li.ui-tabs-active #inbox-tab .notifications{
+  color:var(--primary-color);
+}
+#tabs ul.ui-tabs-nav li.ui-tabs-active #inbox-tab .notifications{
+  background-color: var(--primary-color);
+  border:1px solid #830cff;
+  color: #fff;
+}
+
+
+
+/* notification */
+.notifications{
+  background-color: #666;
+  border:1px solid #444;
+  color: #fff;
+  border-radius: 500px;
+  padding: 2px 8px;
+  font-size: 14px;
+  margin-left:20px;
+}
+
+/* tooltip */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 230px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  border-radius: 6px;
+
+  -webkit-box-shadow: 0px 0px 4px 0px rgba(255,255,255,1);
+  -moz-box-shadow: 0px 0px 4px 0px rgba(255,255,255,1);
+  box-shadow: 0px 0px 4px 0px rgba(255,255,255,1);
+ 
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+/* notify.js */
+.notifyjs-corner .notifyjs-container,
+.notifyjs-corner .notifyjs-container .notifyjs-bootstrap-base span{
+  max-width: 450px;
+  width:90%;
+  word-wrap: break-word;
+  text-wrap:wrap;
+}
+
+/* load */
+#loading {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding-top: 20%;
+  z-index: 9999;
+}
+
+
+#loading img {
+  width: 50px;
+  height: 50px;
+}
+
+
+/* checkboxes */
+.check .cbx {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
+.check .cbx span {
+  display: inline-block;
+  vertical-align: middle;
+  transform: translate3d(0, 0, 0);
+}
+ .check .cbx span:first-child {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  transform: scale(1);
+  vertical-align: middle;
+  border: 1px solid #B9B8C3;
+  transition: all 0.2s ease;
+}
+ .check .cbx span:first-child svg {
+  position: absolute;
+  z-index: 1;
+  top: 8px;
+  left: 6px;
+  fill: none;
+  stroke: white;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 16px;
+  stroke-dashoffset: 16px;
+  transition: all 0.3s ease;
+  transition-delay: 0.1s;
+  transform: translate3d(0, 0, 0);
+}
+ .check .cbx span:first-child:before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: #506EEC;
+  background:var(--primary-color);
+  display: block;
+  transform: scale(0);
+  opacity: 1;
+  border-radius: 50%;
+  transition-delay: 0.2s;
+}
+ .check .cbx span:last-child {
+  margin-left: 20px;
+}
+ .check cbx span:last-child:after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 0;
+  height: 1px;
+  width: 100%;
+  background: #B9B8C3;
+  transform-origin: 0 0;
+  transform: scaleX(0);
+}
+ .check .cbx:hover span:first-child {
+  border-color: #3c53c7;
+  border-color:var(--primary-color);
+}
+
+ .check .marked:checked + .cbx span:first-child {
+  border-color: #3c53c7;
+  background: #3c53c7;
+  border-color:var(--primary-color);
+  background:var(--primary-color);
+  animation: check-15 0.6s ease;
+}
+ .check .marked:checked + .cbx span:first-child svg {
+  stroke-dashoffset: 0;
+}
+ .check .marked:checked + .cbx span:first-child:before {
+  transform: scale(2.2);
+  opacity: 0;
+  transition: all 0.6s ease;
+}
+ .check .marked:checked + .cbx span:last-child {
+  color: #B9B8C3;
+  transition: all 0.3s ease;
+}
+ .check .marked:checked + .cbx span:last-child:after {
+  transform: scaleX(1);
+  transition: all 0.3s ease;
+}
+
+@keyframes check-15 {
+  50% {
+    transform: scale(1.2);
+  }
+}
+/* checkbox toggle */
+/**
+ * Checkbox Toggle UI
+ */
+ input[type="checkbox"].toggle {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-tap-highlight-color: transparent;
+    width: auto;
+    height: auto;
+    vertical-align: middle;
+    position: relative;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    margin: 0 4px;
+    background: none;
+    box-shadow: none;
+}
+input[type="checkbox"].toggle {
+    box-shadow: none;
+}
+input[type="checkbox"].toggle:after {
+    content: '';
+    font-size: 8px;
+    font-weight: 400;
+    line-height: 18px;
+    text-indent: 5px;
+    color: #ffffff;
+    width: 36px;
+    height: 18px;
+    display: inline-block;
+    background-color: #a7aaad;
+    border-radius: 72px;
+    box-shadow: 0 0 12px rgb(0 0 0 / 15%) inset;
+}
+input[type="checkbox"].toggle:before {
+    content: '';
+    width: 14px;
+    height: 14px;
+    display: block;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    margin: 0;
+    border-radius: 50%;
+    background-color: #ffffff;
+}
+input[type="checkbox"].toggle:checked:before {
+    left: 20px;
+    margin: 0;
+    background-color: #ffffff;
+}
+input[type="checkbox"].toggle,
+input[type="checkbox"].togglebefore,
+input[type="checkbox"].toggle:after,
+input[type="checkbox"].toggle:checked:before,
+input[type="checkbox"].toggle:checked:after {
+    transition: ease .15s;
+}
+input[type="checkbox"].toggle:checked:after {
+    content: 'ON';
+    background-color: var(--primary-color);
+}
+
+/* range threshold slider */
+
+input[type="range"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 200px;
+  background-color: transparent;
+
+  &:focus {
+    outline-color: #f8b195;
+  }
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 3px;
+  background: rgb(246, 114, 128);
+  background: -webkit-linear-gradient(
+    left,
+    rgba(246, 114, 128, 1) 0%,
+    rgba(192, 108, 132, 1) 50%,
+    rgba(53, 92, 125, 1) 100%
+  );
+  background: linear-gradient(
+    to right,
+    rgba(246, 114, 128, 1) 0%,
+    rgba(192, 108, 132, 1) 50%,
+    rgba(53, 92, 125, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(
+    startColorstr="#f67280",
+    endColorstr="#355c7d",
+    GradientType=1
+  );
+}
+
+input[type="range"]::-moz-range-track {
+  -moz-appearance: none;
+  appearance: none;
+  height: 3px;
+  background: rgb(246, 114, 128);
+  background: -moz-linear-gradient(
+    left,
+    rgba(246, 114, 128, 1) 0%,
+    rgba(192, 108, 132, 1) 50%,
+    rgba(53, 92, 125, 1) 100%
+  );
+  background: linear-gradient(
+    to right,
+    rgba(246, 114, 128, 1) 0%,
+    rgba(192, 108, 132, 1) 50%,
+    rgba(53, 92, 125, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(
+    startColorstr="#f67280",
+    endColorstr="#355c7d",
+    GradientType=1
+  );
+}
+
+input[type="range"]::-ms-track {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  height: 3px;
+  background: rgb(246, 114, 128);
+  background: -moz-linear-gradient(
+    left,
+    rgba(246, 114, 128, 1) 0%,
+    rgba(192, 108, 132, 1) 50%,
+    rgba(53, 92, 125, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    left,
+    rgba(246, 114, 128, 1) 0%,
+    rgba(192, 108, 132, 1) 50%,
+    rgba(53, 92, 125, 1) 100%
+  );
+  background: linear-gradient(
+    to right,
+    rgba(246, 114, 128, 1) 0%,
+    rgba(192, 108, 132, 1) 50%,
+    rgba(53, 92, 125, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(
+    startColorstr="#f67280",
+    endColorstr="#355c7d",
+    GradientType=1
+  );
+}
+
+input[type="range"]::-webkit-slider-thumb {
+-webkit-appearance: none;
+appearance: none;
+border: 2px solid #f8b195;
+border-radius: 50%;
+height: 20px;
+width: 20px;
+position: relative;
+bottom: 8px;
+background: #222
+  url("http://codemenatalie.com/wp-content/uploads/2019/09/slider-thumb.png")
+  center no-repeat;
+background-size: 50%;
+box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.4);
+cursor: grab;
+  
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+
+input[type="range"]::-moz-range-thumb {
+  -moz-appearance: none;
+  appearance: none;
+  border: 2px solid #f8b195;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  position: relative;
+  bottom: 8px;
+  background: #222
+    url("http://codemenatalie.com/wp-content/uploads/2019/09/slider-thumb.png")
+    center no-repeat;
+  background-size: 50%;
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.4);
+  cursor: grab;
+  
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+input[type="range"]::-ms-thumb {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 2px solid #f8b195;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  position: relative;
+  bottom: 8px;
+  background: #222
+    url("http://codemenatalie.com/wp-content/uploads/2019/09/slider-thumb.png")
+    center no-repeat;
+  background-size: 50%;
+  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.4);
+  cursor: grab;
+  
+  &:active {
+    cursor: grabbing;
+  }
+}

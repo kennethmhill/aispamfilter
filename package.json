@@ -1,0 +1,16 @@
+{
+  "name": "aispamfilter",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "cp index.html dist/ && echo 'Build completed.'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "dependencies": {}
+}
