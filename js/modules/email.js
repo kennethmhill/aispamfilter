@@ -36,21 +36,11 @@ export class Email {
     }
 
     static mark_spam(e, notify, inbox) {
-        var message = inbox.emails.splice(e.index, 1)[0];  // Get the correct email object
+        var message = inbox.emails.splice(e.index, 1)[0]; 
         message.type = 'spam';
-        inbox.spam.push(message);  // Push the email object, not the event object
-
-        Email.update_indices(inbox);
-        Email.update_selected(inbox);
-        inbox.update_mark_all(inbox.current_tab, false);
-        inbox.update_tabs(false);
-
-        // Add the element back to the #emails container
-        var $spam = $('[data-email-id="'+message.id+'"]').detach();
-        $($spam).toggleClass('email spam');
-        $($spam).find('.marked').prop('checked', false);
-        $('#spam').append($spam);
-
+        inbox.spam.push(message); 
+        this.update_inbox(inbox, false);
+        this.move(message);
 
         if (inbox.emails.length === 0) $('#emails .message').text('Inbox is empty.').show();
         else if ($('.email:visible').length === 0) $('#emails .message').text('Nothing found.').show();
@@ -59,20 +49,11 @@ export class Email {
     }
 
     static mark_not_spam(e, notify, inbox) {
-        var message = inbox.spam.splice(e.index, 1)[0];  // Get the correct email object
+        var message = inbox.spam.splice(e.index, 1)[0]; 
         message.type = 'email';
-        inbox.emails.push(message);  // Push the email object, not the event object
-
-        Email.update_indices(inbox);
-        Email.update_selected(inbox);
-        inbox.update_mark_all(inbox.current_tab, false);
-        inbox.update_tabs(false);
-
-        // Add the element back to the #emails container
-        var $email = $('[data-email-id="'+message.id+'"]').detach();
-        $($email).toggleClass('email spam');
-        $($email).find('.marked').prop('checked', false);
-        $('#emails').prepend($email);
+        inbox.emails.push(message);
+        this.update_inbox(inbox, false)
+        this.move(message);
 
         if (inbox.spam.length === 0) $('#spam .message').text('Spam folder is empty. Try running the spam filter.').show();
         else if ($('.spam:visible').length === 0) $('#spam .message').text('Nothing found.').show();
@@ -101,9 +82,22 @@ export class Email {
         });
         $.notify(selection.length + " conversations moved back to inbox.", { className: "success", autoHideDelay: 3000 });
     }
+
+    static move(e){
+        var $message = $('[data-email-id="'+e.id+'"]').detach();
+        $($message).toggleClass('email spam');
+        $($message).find('.marked').prop('checked', false);
+
+        if(e.type == 'spam') $('#spam').append($message);
+        else $('#emails').prepend($message);
+    }
     
-    
-    
+    static update_inbox(inbox, open){
+        Email.update_indices(inbox);
+        Email.update_selected(inbox);
+        inbox.update_mark_all(inbox.current_tab, open);
+        inbox.update_tabs(open);
+    }
 
     static update_indices(inbox) {
         $.each(inbox.emails, (i, e) => Email.update_index(e, i));
