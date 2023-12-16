@@ -40,12 +40,13 @@ export class Inbox {
     
         // event delegation (must be added dynamically in modules)
         email_container.on('click', '.mark-spam', (e) => {
-            var email = this.emails[$(e.currentTarget).closest('.email').data('email-index')];
+            var email = this.emails[$(e.currentTarget).closest('.email').attr('data-email-index')];
+            console.log("clicked email:"+email);
             Email.mark_spam(email, true, this);
         });
         
         spam_container.on('click', '.mark-not-spam', (e) => {
-            var email = this.spam[$(e.currentTarget).closest('.spam').data('email-index')];
+            var email = this.spam[$(e.currentTarget).closest('.spam').attr('data-email-index')];
             Email.mark_not_spam(email, true, this);
         });
 
@@ -58,13 +59,18 @@ export class Inbox {
         });
 
         content.on('click', '.email', (e) => {
-            var id = $(e.currentTarget).closest('.email').data('email-id');
+            var id = $(e.currentTarget).closest('.email').attr('data-email-id');
             Email.mark(id, e, this);
         });
 
         content.on('click', '.spam', (e) => {
-            var id = $(e.currentTarget).closest('.spam').data('email-id');
+            var id = $(e.currentTarget).closest('.spam').attr('data-email-id');
             Email.mark(id, e, this);
+        });
+
+        content.on('click', '.check', (e) => {
+            // Find the associated checkbox and toggle its checked state
+            $(this).find('.marked').click();
         });
     
         email_container.fadeIn(1000);

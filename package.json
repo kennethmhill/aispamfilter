@@ -12,5 +12,7 @@
     "node": ">=14.0.0"
   },
   "browserslist": "> 0.5%, last 2 versions, not dead",
-  "dependencies": {}
+  "dependencies": {
+    "http-server": "^14.1.1"
+  }
 }

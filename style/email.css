@@ -117,6 +117,7 @@
 }
 
 .spam_prob{
+    transition:.4s all;
     background-color: #666;
     border: 1px solid #444;
     color: #fff;

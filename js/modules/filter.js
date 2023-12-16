@@ -97,9 +97,6 @@ export class Filter {
     
         for (let i = 0; i < inbox.spam.length; i++) {
             const message = inbox.spam[i];
-            /*console.log('message.sender:', message.sender);
-            console.log('message.subject:', message.subject);
-            console.log('message.content:', message.content);*/
     
             // Ensure that message.sender, message.subject, and message.content are defined
             if (message.sender && message.subject && message.content) {
@@ -124,5 +121,4 @@ export class Filter {
             inbox.update_mark_all(inbox.current_tab, false);
         }
     }
-       
 }

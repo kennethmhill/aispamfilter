@@ -14,7 +14,7 @@ export class Email {
     to_html() {
         var tooltip = '';
         var p = this.spam_prob * 100, colors = get_email_colors(this.spam_prob, threshold);
-        var html = '<div class="' + (this.is_spam ? 'spam' : 'email') + '" data-email-id="' + this.id + '" data-email-index="'+ this.index + '">';
+        var html = '<div class="' + (this.is_spam ? 'spam' : 'email') + '" data-email-id="' + this.id + '" data-email-index="'+ this.index + '" data-spam-prob="'+this.spam_prob+'">';
         html += '<button class="mark-spam"><i class="fa fa-times-circle"></i>Mark Spam</button>';
         html += '<button class="mark-not-spam"><i class="fa fa-check-circle"></i>Not Spam</button>';
         html += '<div class="spam_prob hidden" style="background:'+colors[0]+'; border:1px solid '+colors[1]+';" data-value="'+Math.ceil(p)+'"><i class="fa fa-ban"></i>'+ p.toFixed(2) +'%'+tooltip+'</div>';
@@ -29,8 +29,7 @@ export class Email {
 
     static mark(id, e, inbox) {
         if (!$(e.target).is('button')) {
-            const checkbox = $('[data-email-id="' + id + '"] .marked');
-            $(checkbox).prop('checked', !$(checkbox).prop("checked"));
+            $($('[data-email-id="' + id + '"] .marked')).prop('checked', !$($('[data-email-id="' + id + '"] .marked')).prop("checked"));
             Email.update_selected(inbox);
             inbox.update_mark_all(inbox.current_tab, false);
         }
@@ -45,13 +44,13 @@ export class Email {
         Email.update_selected(inbox);
         inbox.update_mark_all(inbox.current_tab, false);
         inbox.update_tabs(false);
-        
 
         // Add the element back to the #emails container
         var $spam = $('[data-email-id="'+message.id+'"]').detach();
         $($spam).toggleClass('email spam');
         $($spam).find('.marked').prop('checked', false);
         $('#spam').append($spam);
+
 
         if (inbox.emails.length === 0) $('#emails .message').text('Inbox is empty.').show();
         else if ($('.email:visible').length === 0) $('#emails .message').text('Nothing found.').show();
@@ -63,7 +62,7 @@ export class Email {
         var message = inbox.spam.splice(e.index, 1)[0];  // Get the correct email object
         message.type = 'email';
         inbox.emails.push(message);  // Push the email object, not the event object
-    
+
         Email.update_indices(inbox);
         Email.update_selected(inbox);
         inbox.update_mark_all(inbox.current_tab, false);
@@ -77,21 +76,34 @@ export class Email {
 
         if (inbox.spam.length === 0) $('#spam .message').text('Spam folder is empty. Try running the spam filter.').show();
         else if ($('.spam:visible').length === 0) $('#spam .message').text('Nothing found.').show();
-        if (inbox.emails.length === 1) $('#emails .message').hide();
-        if (notify) $.notify("Conversation marked as spam.", { className: "success", autoHideDelay: 9000 });
+        if (inbox.spam.length === 1) $('#emails .message').hide();
+        if (notify) $.notify("Conversation moved back to inbox.", { className: "success", autoHideDelay: 9000 });
+    
     }
+    
 
-    static mark_all_spam(inbox){
-        var selection = $('.email :checkbox.marked:checked');
-        $.each(selection, e => Email.mark_spam(this, false, inbox));
+    static mark_all_spam(inbox) {
+        var selection = $('.email .check .marked:checked');
+        selection.each((index, element) => {
+            var emailIndex = $(element).closest('.email').data('email-index');
+            var email = inbox.emails[emailIndex];
+            Email.mark_spam(email, false, inbox);
+        });
         $.notify(selection.length + " conversations moved to spam folder.", { className: "success", autoHideDelay: 3000 });
     }
-
-    static mark_all_not_spam(inbox){
-        var selection = $('.spam:checkbox.marked:checked');
-        $.each(selection, e => Email.mark_not_spam(this, false, inbox));
-        $.notify(selection.length + " conversations moved to spam folder.", { className: "success", autoHideDelay: 3000 });
+    
+    static mark_all_not_spam(inbox) {
+        var selection = $('.spam .check .marked:checked');
+        selection.each((index, element) => {
+            var emailIndex = $(element).closest('.spam').data('email-index');
+            var email = inbox.spam[emailIndex];
+            Email.mark_not_spam(email, false, inbox);
+        });
+        $.notify(selection.length + " conversations moved back to inbox.", { className: "success", autoHideDelay: 3000 });
     }
+    
+    
+    
 
     static update_indices(inbox) {
         $.each(inbox.emails, (i, e) => Email.update_index(e, i));
@@ -100,13 +112,13 @@ export class Email {
     
     static update_index(e, i) {
         const selector = '[data-email-id="' + e.id + '"]';
-        $(selector).data('email-index', i);
+        $(selector).attr('data-email-index', i);
         e.index = i;
     }
     
     static update_selected(inbox) {    
-        inbox.emails_selected = $('.email :checkbox.marked:checked').length;
-        inbox.spam_selected = $('.spam :checkbox.marked:checked').length;
+        inbox.emails_selected = $('.email .check .marked:checked').length;
+        inbox.spam_selected = $('.spam .check .marked:checked').length;
     }
     
 }

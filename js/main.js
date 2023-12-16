@@ -70,8 +70,6 @@ const loadUI = () => {
     $('#s').on("focus", function(){
         $(this).parent().toggleClass('active');
     });
-
-    $("#heuristics").button(); // // init heuristics button, checkbox -> toggle
     // heuristics on switch 
     $('#heuristics').change(function() {
         app.filter.enable_ai = $(this).prop('checked');
@@ -99,6 +97,14 @@ const loadUI = () => {
             $element.html(content); // replace content
         });
     };
+
+    $('#threshold').on('change', function() { 
+        app.settings.threshold = this.value; 
+        app.filter.threshold = this.value;
+        var $messages = $.merge($(app.inbox.emails), $(app.inbox.spam));
+        Util.update_threshold($messages, this.value);
+    });
+    
     
     $( "#tabs" ).tabs({ active: 0, activate: function (e, ui) { app.inbox.open_tab($("#tabs").tabs("option", "active"));} });
 };

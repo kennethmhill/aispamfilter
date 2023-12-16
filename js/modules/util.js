@@ -52,6 +52,14 @@ export function darken(rgb, factor) {
     }
 }
 
+export function update_threshold(m, t){
+    m.each((i,e) => {
+        console.log(e);
+        var c = this.get_email_colors(e.spam_prob, t);
+        $('[data-email-id="'+e.id+'"]').find('.spam_prob').css({ background: c[0], border: `1px solid ${c[1]}`});
+    });
+}
+
 export function get_email_colors(p, t) {
     console.log('p:'+p+',t:'+t);
     var green = [162, 193, 28],
@@ -59,6 +67,8 @@ export function get_email_colors(p, t) {
         red = [255, 0, 0],
         tooltip = '',
         color = '';
+
+    console.log('thresh:'+t);
 
     if (p < t) {
         color = interpolate_rgb(green, yellow, p / t);
