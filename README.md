@@ -13,6 +13,6 @@ Instructions
 - visit https://localhost:3000
 
 before filtering:
-![AISpamFilter Before filtering](spamfilter1.png?raw=true "AISpamFilter Before filtering")
+![AISpamFilter Before filtering](spamfilter1.png? "AISpamFilter Before filtering")
 after filtering:
-![AISpamFilter After filtering](spamfilter2.png?raw=true "AISpamFilter After filtering")
+![AISpamFilter After filtering](spamfilter2.png? "AISpamFilter After filtering")
